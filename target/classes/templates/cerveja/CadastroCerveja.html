@@ -11,9 +11,17 @@
 	<form method="POST">
 		<span th:text="${mensagem}"></span>
 		<br />
+		
 		<label for="sku">SKU</label>
 		<input type="text" name="sku" id="sku" />
+		<br />
 		
+		<label for="nome">NOME</label>
+		<input type="text" id="nome" name="nome"/>
+		<br />
+		
+		<label for="descricao">DESCRIÇÃO</label>
+		<textarea rows="3" cols="30" name="descricao" id="descricao"></textarea>
 		<br />
 		<input type="submit" value="Salvar"/>
 	</form>
