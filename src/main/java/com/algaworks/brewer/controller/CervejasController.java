@@ -3,7 +3,6 @@ package com.algaworks.brewer.controller;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,15 +14,14 @@ import com.algaworks.brewer.model.Cerveja;
 public class CervejasController {
 
 	@RequestMapping("/cervejas/novo")
-	public String novo() {
+	public String novo(Cerveja cerveja) {
 		return "cerveja/CadastroCerveja";
 	}
 	
 	@PostMapping(value = "/cervejas/novo")
-	public String cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
+	public String cadastrar(@Valid Cerveja cerveja, BindingResult result, RedirectAttributes attributes) {
 		if(result.hasErrors()) {
-			model.addAttribute("mensagem", "Erro ao tentar salvar o cadastro");
-			return "cerveja/CadastroCerveja";
+			return novo(cerveja);
 		}
 		
 		attributes.addFlashAttribute("mensagem", "Cadastro salvo com sucesso!");
