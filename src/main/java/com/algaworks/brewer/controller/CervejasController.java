@@ -11,10 +11,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.algaworks.brewer.model.Cerveja;
 
-@Controller("/cervejas")
+@Controller
+@RequestMapping("/cervejas")
 public class CervejasController {
 
-	@RequestMapping("/novo")
+	@GetMapping("/novo")
 	public String novo(Cerveja cerveja) {
 		return "cerveja/CadastroCerveja";
 	}
