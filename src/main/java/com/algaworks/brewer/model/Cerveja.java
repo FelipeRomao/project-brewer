@@ -40,7 +40,7 @@ public class Cerveja implements Serializable {
 	@Column(name = "teor_alcoolico")
 	private BigDecimal teorAlcoolico;
 
-	private BigDecimal comissão;
+	private BigDecimal comissao;
 
 	@Column(name = "quantidade_estoque")
 	private Integer quantidadeEstoque;
@@ -104,11 +104,11 @@ public class Cerveja implements Serializable {
 	}
 
 	public BigDecimal getComissão() {
-		return comissão;
+		return comissao;
 	}
 
 	public void setComissão(BigDecimal comissão) {
-		this.comissão = comissão;
+		this.comissao = comissão;
 	}
 
 	public Integer getQuantidadeEstoque() {
