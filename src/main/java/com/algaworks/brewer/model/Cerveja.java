@@ -103,12 +103,12 @@ public class Cerveja implements Serializable {
 		this.teorAlcoolico = teorAlcoolico;
 	}
 
-	public BigDecimal getComissão() {
+	public BigDecimal getComissao() {
 		return comissao;
 	}
 
-	public void setComissão(BigDecimal comissão) {
-		this.comissao = comissão;
+	public void setComissao(BigDecimal comissao) {
+		this.comissao = comissao;
 	}
 
 	public Integer getQuantidadeEstoque() {
