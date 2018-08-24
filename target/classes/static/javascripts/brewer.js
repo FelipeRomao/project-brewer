@@ -1,7 +1,7 @@
 $(function(){
 	var decimal = $('.js-decimal');
-	decimal.maskMoney({decimal: ',', thousands: '.', allowZero: true});
+	decimal.maskMoney();
 	
 	var plain = $('.js-plain');
-	plain.maskMoney({precision : 0, thousands: '.'});
+	plain.maskMoney({precision : 0 });
 });
