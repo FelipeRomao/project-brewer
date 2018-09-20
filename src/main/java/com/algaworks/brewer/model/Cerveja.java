@@ -44,7 +44,7 @@ public class Cerveja implements Serializable {
 	@NotBlank(message = "A descrição é obrigatória")
 	@Size(max = 50, message = "A descrição deve conter entre 1 a 50 caracteres")
 	private String descricao;
-	
+
 	@NotNull(message = "Valor é obrigatório")
 	@DecimalMin("0.01")
 	@DecimalMax(value = "9999999.99", message = "O valor da cerveja dever ser menor que 9.999.999,99")
@@ -54,7 +54,7 @@ public class Cerveja implements Serializable {
 	@DecimalMax(value = "100.0", message = "O valor do teor alcóolico dever ser menor que 100")
 	@Column(name = "teor_alcoolico")
 	private BigDecimal teorAlcoolico;
-	
+
 	@NotNull(message = "A comissão é obrigatória")
 	@DecimalMax(value = "100.0", message = "A comissão deve ser igual ou menor que 100")
 	private BigDecimal comissao;
@@ -63,25 +63,31 @@ public class Cerveja implements Serializable {
 	@Max(value = 9999, message = "A quantidade em estoque deve ser menor que 9.999")
 	@Column(name = "quantidade_estoque")
 	private Integer quantidadeEstoque;
-	
+
 	@NotNull(message = "A origem é obrigatória")
 	@Enumerated(EnumType.STRING)
 	private Origem origem;
-	
+
 	@NotNull(message = "O sabor é obrigatório")
 	@Enumerated(EnumType.STRING)
 	private Sabor sabor;
-	
+
 	@NotNull(message = "O estilo é obrigatório")
 	@ManyToOne
 	@JoinColumn(name = "codigo_estilo")
 	private Estilo estilo;
 
-	@PrePersist @PreUpdate
+	private String foto;
+
+	@Column(name = "content_type")
+	private String contentType;
+
+	@PrePersist
+	@PreUpdate
 	private void prePersistUpdate() {
 		sku = sku.toUpperCase();
 	}
-	
+
 	public String getSku() {
 		return sku;
 	}
@@ -168,6 +174,22 @@ public class Cerveja implements Serializable {
 
 	public void setEstilo(Estilo estilo) {
 		this.estilo = estilo;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 	@Override
