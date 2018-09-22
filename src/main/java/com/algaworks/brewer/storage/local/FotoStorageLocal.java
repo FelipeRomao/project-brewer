@@ -20,7 +20,7 @@ public class FotoStorageLocal implements FotoStorage {
 	private Path localTemporario;
 
 	public FotoStorageLocal() {
-		this.local = getDefault().getPath(System.getenv("HOME"), ".brewerfotos");
+		this(getDefault().getPath(System.getenv("HOME"), ".brewerfotos"));
 	}
 
 	public FotoStorageLocal(Path path) {

@@ -13,7 +13,7 @@ import com.algaworks.brewer.storage.local.FotoStorageLocal;
 public class ServiceConfig {
 
 	@Bean
-	public FotoStorage fotoStorageLocal() {
+	public FotoStorage fotoStorage() {
 		return new FotoStorageLocal();
 	}
 }
