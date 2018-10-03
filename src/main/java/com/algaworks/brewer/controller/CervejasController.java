@@ -48,5 +48,14 @@ public class CervejasController {
 		
 		return new ModelAndView("redirect:/cervejas/novo");
 	}
+	
+	@GetMapping
+	public ModelAndView pesquisar() {
+		ModelAndView mv = new ModelAndView("cerveja/PesquisaCervejas");
+		mv.addObject("estilos", estilos.findAll());
+		mv.addObject("sabores", Sabor.values());
+		mv.addObject("origens", Origem.values());
+		return mv;
+	}
 
 }
