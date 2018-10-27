@@ -51,7 +51,9 @@ public class PageWrapper<T> {
 	public String urlOrdenada(String propriedade) {
 		UriComponentsBuilder uriBuilderOrder = UriComponentsBuilder.fromUriString(uriBuilder.build(true).encode().toUriString());	
 		
-		return uriBuilderOrder.replaceQueryParam("sort", propriedade).build(true).encode().toUriString();
+		String valorSort = String.format("%s,%s", propriedade, inverterDirecao(propriedade));
+		
+		return uriBuilderOrder.replaceQueryParam("sort", valorSort).build(true).encode().toUriString();
 	}
 	
 	public String inverterDirecao(String propriedade) {
@@ -65,6 +67,19 @@ public class PageWrapper<T> {
 		
 		return direcao;
 	}
-	// Parei no tempo de 9 min e 28 seg
+	
+	public boolean descendente(String propriedade) {
+		return inverterDirecao(propriedade).equals("asc");
+	}
+	
+	public boolean ordenada(String propriedade) {
+		Order order = page.getSort() != null ? page.getSort().getOrderFor(propriedade) : null;
+		
+		if(order == null) {
+			return false;
+		}
+		
+		return page.getSort().getOrderFor(propriedade) != null ? true : false;
+	}
 	
 }
