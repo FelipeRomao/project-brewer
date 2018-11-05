@@ -18,6 +18,7 @@ Brewer.MascaraCpfCnpj = (function(){
 		this.inputCpfCnpj.mask(tipoPessoaSelecionada.data('mascara'));
 		this.inputCpfCnpj.val('');
 		this.inputCpfCnpj.removeAttr('disabled');
+		
 	}
 	
 	return MascaraCpfCnpj;
