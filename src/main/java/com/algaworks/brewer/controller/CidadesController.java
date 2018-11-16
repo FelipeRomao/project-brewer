@@ -32,7 +32,7 @@ public class CidadesController {
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-			
+			throw new RuntimeException("Erro ao selecionar cidade!", e);
 		}
 		return cidades.findByEstadoCodigo(codigoEstado);
 	}
