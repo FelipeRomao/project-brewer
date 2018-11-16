@@ -27,7 +27,7 @@ Brewer.ComboCidade = (function(){
 		this.comboEstado = comboEstado;
 		this.combo = $('#cidade');
 		this.imgLoading = $('.js-img-loading');
-		this.inputHiddenCidadeSelecionada('#inputHiddenCidadeSelecionada');
+		this.inputHiddenCidadeSelecionada = $('#inputHiddenCidadeSelecionada');
 	}
 	
 	ComboCidade.prototype.iniciar = function() {
