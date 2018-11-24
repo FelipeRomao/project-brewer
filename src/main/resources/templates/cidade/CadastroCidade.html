@@ -2,6 +2,7 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:brewer="http://brewer.algaworks.com"
 	layout:decorate="~{layout/LayoutPadrao}">
 <head>
 	<title>Cadastro de cidade</title>
@@ -16,18 +17,21 @@
 		</div>
 		
 		<div class="container-fluid">
-			<form>
+			<form method="POST" th:action="@{/cidades/nova}" th:object="${cidade}">
+				<brewer:message />
+				
 				<div class="row">
-					<div class="form-group col-sm-4 bw-required">
+					<div class="form-group col-sm-4 bw-required" brewer:classforerror="estado">
 						<label for="estado" class="control-label">Estado</label>
-						<select id="estado" class="form-control">
-							<option>Selecione o estado</option>
+						<select id="estado" class="form-control" th:field="*{estado}">
+							<option value="">Selecione o estado</option>
+							<option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}">São Paulo</option>
 						</select>
 					</div>
 					
-					<div class="form-group col-sm-8 bw-required">
+					<div class="form-group col-sm-8 bw-required" brewer:classforerror="nome">
 						<label for="nome" class="control-label">Nome</label>
-						<input type="text" id="nome" class="form-control" autofocus="autofocus" />
+						<input type="text" id="nome" class="form-control" autofocus="autofocus" th:field="*{nome}" />
 					</div>
 				</div>
 				<button type="submit" class="btn btn-primary">Salvar</button>

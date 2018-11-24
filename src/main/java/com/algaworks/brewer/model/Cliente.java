@@ -156,6 +156,3 @@ public class Cliente implements Serializable {
 	}
 
 }
-
-
-//Parei 06 min 56 seg
