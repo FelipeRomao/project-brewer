@@ -34,12 +34,12 @@
 			<form method="GET" th:object="${usuarioFilter}" th:action="@{/usuarios}">
 				<div class="row">
 					<div class="form-group col-sm-6">
-						<label for="nome" class="control-label">Nome</label> <input
-							type="text" id="nome" class="form-control" />
+						<label for="nome" class="control-label">Nome</label> 
+						<input type="text" id="nome" class="form-control" th:field="*{nome}" />
 					</div>
 					<div class="form-group col-sm-6">
-						<label for="email" class="control-label">E-mail</label> <input
-							type="text" id="email" class="form-control" />
+						<label for="email" class="control-label">E-mail</label> 
+						<input type="text" id="email" class="form-control" th:field="*{email}" />
 					</div>
 				</div>
 				<div class="row">
@@ -88,7 +88,7 @@
 					</thead>
 
 					<tbody>
-						<tr th:each="usuario : ${usuarios}">
+						<tr th:each="usuario : ${pagina.conteudo}">
 							<td>
 								<div class="checkbox  aw-checkbox-no-margin" th:if="${#authentication.principal.usuario.codigo != usuario.codigo}">
 		            				<input type="checkbox" class="js-selecao" data:codigo="${usuario.codigo}" />
@@ -119,12 +119,15 @@
 							</td>
 						</tr>
 
-						<tr th:if="${usuarios.empty}">
-							<td colspan="4">Nenhum usuário encontrado</td>
+						<tr th:if="${pagina.vazia}">
+							<td colspan="6">Nenhum usuário encontrado</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
+			
+			<brewer:pagination page="${pagina}" />
+			
 		</div>
 	</section>
 	
