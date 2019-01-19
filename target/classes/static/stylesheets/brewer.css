@@ -206,6 +206,13 @@
 	color : red;
 }
 
+/*Validação com o input-group*/
+.has-error .input-group-btn .btn.btn-default {
+	color: #a94442;
+	border-color: #a94442;
+	background-color: #f2dede;
+}
+
 /* Tabela Item */
 .bw-tabela-item {
 	position: relative; /* Para que o painel de exclusão apareça dentro da linha */
