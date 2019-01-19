@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -25,6 +26,7 @@ import com.algaworks.brewer.validation.AtributoConfirmacao;
 @AtributoConfirmacao(atributo = "senha", atributoConfirmacao = "confirmacaoSenha", message = "Confirmação da senha não confere")
 @Entity
 @Table(name = "usuario")
+@DynamicUpdate
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;

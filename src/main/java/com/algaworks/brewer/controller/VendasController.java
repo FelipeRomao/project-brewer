@@ -40,13 +40,14 @@ public class VendasController {
 		return mvTabelaItensVenda(uuid);
 
 	}
-	
+
 	@PutMapping("/item/{codigoCerveja}")
-	public ModelAndView alterarQuantidadeItem(@PathVariable("codigoCerveja") Cerveja cerveja, Integer quantidade, String uuid) {
+	public ModelAndView alterarQuantidadeItem(@PathVariable("codigoCerveja") Cerveja cerveja, Integer quantidade,
+			String uuid) {
 		tabelaItens.alterarQuantidadeItens(uuid, cerveja, quantidade);
 		return mvTabelaItensVenda(uuid);
 	}
-	
+
 	@DeleteMapping("/item/{uuid}/{codigoCerveja}")
 	public ModelAndView excluirItem(@PathVariable("codigoCerveja") Cerveja cerveja, @PathVariable String uuid) {
 		tabelaItens.excluirItem(uuid, cerveja);
@@ -59,5 +60,5 @@ public class VendasController {
 		mv.addObject("valorTotal", tabelaItens.getValorTotal(uuid));
 		return mv;
 	}
-	
+
 }
