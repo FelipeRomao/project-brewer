@@ -111,8 +111,11 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		NumberStyleFormatter integerFormatter = new NumberStyleFormatter("#,##0");
 		conversionService.addFormatterForFieldType(Integer.class, integerFormatter);
 
+		
+		//API de Datas do Java 8
 		DateTimeFormatterRegistrar dateTimeFormatterRegistrar = new DateTimeFormatterRegistrar();
 		dateTimeFormatterRegistrar.setDateFormatter(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		dateTimeFormatterRegistrar.setTimeFormatter(DateTimeFormatter.ofPattern("HH:mm"));
 		dateTimeFormatterRegistrar.registerFormatters(conversionService);
 		
 		return conversionService;
