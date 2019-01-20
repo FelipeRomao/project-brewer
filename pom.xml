@@ -69,6 +69,7 @@
 		
 		<!-- JUnit -->
 		<junit.version>4.12</junit.version>
+		
 	</properties>
 
 	<build>
@@ -285,6 +286,14 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+	
+	
+		<!-- Java Mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
 		</dependency>
 	
 	</dependencies>
