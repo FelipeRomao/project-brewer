@@ -66,10 +66,12 @@ Brewer.MaskDate = (function() {
 	
 	function MaskDate() {
 		this.inputDate = $('.js-date');
+		this.inputDateSeparado = $('#dataEntrega');
 	}
 	
 	MaskDate.prototype.enable = function() {
 		this.inputDate.mask('00/00/0000');
+		this.inputDateSeparado.mask('00/00/0000');
 		
 		this.inputDate.datepicker({
 			orientation : 'bottom',
@@ -80,6 +82,18 @@ Brewer.MaskDate = (function() {
 	
 	return MaskDate;
 	
+}());
+
+Brewer.MaskTime = (function() {
+	function MaskTime() {
+		this.inputTime = $('#horarioEntrega');
+	}	
+	
+	MaskTime.prototype.iniciar = function() {
+		this.inputTime.mask('00:00');
+	}
+	
+	return MaskTime;
 }());
 
 Brewer.Security = (function() {
@@ -124,4 +138,7 @@ $(function() {
 	
 	var security = new Brewer.Security();
 	security.enable();
+	
+	var maskTime = new Brewer.MaskTime();
+	maskTime.iniciar();
 });
