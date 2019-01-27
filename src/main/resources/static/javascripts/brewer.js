@@ -122,6 +122,7 @@ Brewer.formatarMoeda = function(valor) {
 Brewer.recuperarValor = function(valorFormatado) {
 	return numeral().unformat(valorFormatado);
 }
+
  
 $(function() {
 	var maskMoney = new Brewer.MaskMoney();
@@ -141,4 +142,5 @@ $(function() {
 	
 	var maskTime = new Brewer.MaskTime();
 	maskTime.iniciar();
+
 });
