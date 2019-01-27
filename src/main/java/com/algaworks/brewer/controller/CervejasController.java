@@ -46,8 +46,8 @@ public class CervejasController {
 	@Autowired
 	private Cervejas cervejas;
 
-	@GetMapping(value = "/novo")
-	public ModelAndView novo(Cerveja cerveja) {
+	@GetMapping(value = "/nova")
+	public ModelAndView nova(Cerveja cerveja) {
 		ModelAndView mv = new ModelAndView("cerveja/CadastroCerveja");
 		mv.addObject("sabores", Sabor.values());
 		mv.addObject("estilos", estilos.findAll());
@@ -55,16 +55,16 @@ public class CervejasController {
 		return mv;
 	}
 
-	@PostMapping(value = "/novo")
-	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, RedirectAttributes attributes) {
+	@PostMapping(value = { "/novo", "{\\d+}" })
+	public ModelAndView salvar(@Valid Cerveja cerveja, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
-			return novo(cerveja);
+			return nova(cerveja);
 		}
 
 		cadastroCervejaService.salvar(cerveja);
 		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso!");
 
-		return new ModelAndView("redirect:/cervejas/novo");
+		return new ModelAndView("redirect:/cervejas/nova");
 	}
 
 	@GetMapping
@@ -95,6 +95,14 @@ public class CervejasController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 		return ResponseEntity.ok().build();
+	}
+	
+	@GetMapping("/{codigo}")
+	public ModelAndView editar(@PathVariable("codigo") Cerveja cerveja) {
+		ModelAndView mv = nova(cerveja);
+		mv.addObject(cerveja);
+		
+		return mv;
 	}
 
 }

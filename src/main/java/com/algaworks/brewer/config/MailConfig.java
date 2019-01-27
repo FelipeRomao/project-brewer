@@ -29,9 +29,6 @@ public class MailConfig {
 		mailSender.setPort(env.getProperty("mail.smtp.port", Integer.class));
 		mailSender.setUsername(env.getProperty("mail.smtp.username"));
 		mailSender.setPassword(env.getProperty("mail.smtp.password"));
-		
-		System.out.println("username : " + env.getProperty("mail.smtp.username"));
-		System.out.println("password : " + env.getProperty("mail.smtp.password"));
 				
 		Properties props = new Properties();
 		props.put("mail.transport.protocol", "smtp");
