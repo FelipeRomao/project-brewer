@@ -36,13 +36,13 @@ public class ClientesController {
 
 	@Autowired
 	private Estados estados;
-	
+
 	@Autowired
 	private CadastroClienteService cadastroClienteService;
-	
+
 	@Autowired
 	private Clientes clientes;
-	
+
 	@GetMapping("/novo")
 	public ModelAndView novo(Cliente cliente) {
 		ModelAndView mv = new ModelAndView("cliente/CadastroCliente");
@@ -50,36 +50,36 @@ public class ClientesController {
 		mv.addObject("estados", estados.findAll());
 		return mv;
 	}
-	
-	@PostMapping("/novo") 
+
+	@PostMapping("/novo")
 	public ModelAndView salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attributes) {
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return novo(cliente);
 		}
-		
+
 		try {
 			cadastroClienteService.salvar(cliente);
-		} catch(CpfCnpjClienteJaCadastradoException e) {
+		} catch (CpfCnpjClienteJaCadastradoException e) {
 			result.rejectValue("cpfOuCnpj", e.getMessage(), e.getMessage());
 			return novo(cliente);
 		}
-		
+
 		attributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!");
 		return new ModelAndView("redirect:/clientes/novo");
 	}
-	
+
 	@GetMapping
 	public ModelAndView pesquisar(ClienteFilter filtro, BindingResult result,
 			@PageableDefault(size = 3) Pageable pageable, HttpServletRequest httpServletRequest) {
 		ModelAndView mv = new ModelAndView("cliente/PesquisaClientes");
 		mv.addObject("tipoPessoa", TipoPessoa.values());
-		
+
 		PageWrapper<Cliente> paginaWrapper = new PageWrapper<>(clientes.filtrar(filtro, pageable), httpServletRequest);
 		mv.addObject("pagina", paginaWrapper);
-		
-		return mv; 
+
+		return mv;
 	}
-	
+
 	@RequestMapping(consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody List<Cliente> pesquisar(String nome) {
 		validarTamanhoNome(nome);
@@ -87,12 +87,12 @@ public class ClientesController {
 	}
 
 	private void validarTamanhoNome(String nome) {
-		if(StringUtils.isEmpty(nome) || nome.length() < 3) {
+		if (StringUtils.isEmpty(nome) || nome.length() < 3) {
 			throw new IllegalArgumentException();
 		}
-		
+
 	}
-	
+
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<Void> tratarIllegalArgumentException(IllegalArgumentException e) {
 		return ResponseEntity.badRequest().build();

@@ -26,58 +26,58 @@ public class CervejasImpl implements CervejasQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@Autowired
 	private PaginacaoUtil paginacaoUtil;
-	
+
 	@SuppressWarnings("unchecked")
-	@Override 
+	@Override
 	@Transactional(readOnly = true)
 	public Page<Cerveja> filtrar(CervejaFilter filtro, Pageable pageable) {
-		
+
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Cerveja.class);
-		
+
 		paginacaoUtil.preparar(criteria, pageable);
 		adicionarFiltro(filtro, criteria);
-		
+
 		return new PageImpl<>(criteria.list(), pageable, total(filtro));
 	}
-	
+
 	private Long total(CervejaFilter filtro) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Cerveja.class);
 		adicionarFiltro(filtro, criteria);
 		criteria.setProjection(Projections.rowCount());
-		
+
 		return (Long) criteria.uniqueResult();
 	}
 
 	private void adicionarFiltro(CervejaFilter filtro, Criteria criteria) {
-		if(filtro != null) {
-			if(!StringUtils.isEmpty(filtro.getSku())) {
+		if (filtro != null) {
+			if (!StringUtils.isEmpty(filtro.getSku())) {
 				criteria.add(Restrictions.eq("sku", filtro.getSku()));
 			}
-			
-			if(!StringUtils.isEmpty(filtro.getNome())) {
+
+			if (!StringUtils.isEmpty(filtro.getNome())) {
 				criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
 			}
-			
-			if(isEstiloPresente(filtro)) {
+
+			if (isEstiloPresente(filtro)) {
 				criteria.add(Restrictions.eq("estilo", filtro.getEstilo()));
 			}
-			
-			if(!StringUtils.isEmpty(filtro.getSabor())) {
+
+			if (!StringUtils.isEmpty(filtro.getSabor())) {
 				criteria.add(Restrictions.eq("sabor", filtro.getSabor()));
 			}
-			
-			if(!StringUtils.isEmpty(filtro.getOrigem())) {
+
+			if (!StringUtils.isEmpty(filtro.getOrigem())) {
 				criteria.add(Restrictions.eq("origem", filtro.getOrigem()));
 			}
-			
-			if(!StringUtils.isEmpty(filtro.getValorDe())) {
+
+			if (!StringUtils.isEmpty(filtro.getValorDe())) {
 				criteria.add(Restrictions.ge("valor", filtro.getValorDe()));
 			}
-			
-			if(!StringUtils.isEmpty(filtro.getValorAte())) {
+
+			if (!StringUtils.isEmpty(filtro.getValorAte())) {
 				criteria.add(Restrictions.le("valor", filtro.getValorAte()));
 			}
 		}
@@ -92,11 +92,9 @@ public class CervejasImpl implements CervejasQueries {
 		String jpql = "select new com.algaworks.brewer.dto.CervejaDTO(codigo, sku, nome, origem, valor, foto) "
 				+ "from Cerveja where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)";
 		List<CervejaDTO> cervejasFiltradas = manager.createQuery(jpql, CervejaDTO.class)
-				.setParameter("skuOuNome", skuOuNome + "%")
-				.getResultList();
-		
+				.setParameter("skuOuNome", skuOuNome + "%").getResultList();
+
 		return cervejasFiltradas;
 	}
 
-	
 }

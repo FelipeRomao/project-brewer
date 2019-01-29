@@ -12,7 +12,7 @@ public class AtributoConfirmacaoValidator implements ConstraintValidator<Atribut
 
 	private String atributo;
 	private String atributoConfirmacao;
-	
+
 	@Override
 	public void initialize(AtributoConfirmacao constraintAnnotation) {
 		this.atributo = constraintAnnotation.atributo();
@@ -22,24 +22,25 @@ public class AtributoConfirmacaoValidator implements ConstraintValidator<Atribut
 	@Override
 	public boolean isValid(Object object, ConstraintValidatorContext context) {
 		boolean valido = false;
-		
+
 		try {
 			Object valorAtributo = BeanUtils.getProperty(object, this.atributo);
 			Object valorAtributoConfirmacao = BeanUtils.getProperty(object, this.atributoConfirmacao);
-			
-			valido = ambosSaoNull(valorAtributo, valorAtributoConfirmacao) || ambosSaoIguais(valorAtributo, valorAtributoConfirmacao);
-			
-		} catch(Exception e) {
+
+			valido = ambosSaoNull(valorAtributo, valorAtributoConfirmacao)
+					|| ambosSaoIguais(valorAtributo, valorAtributoConfirmacao);
+
+		} catch (Exception e) {
 			throw new RuntimeException("Erro recuperando valores dos atributos", e);
 		}
-		
-		if(!valido) {
+
+		if (!valido) {
 			context.disableDefaultConstraintViolation();
 			String mensagem = context.getDefaultConstraintMessageTemplate();
 			ConstraintViolationBuilder violationBuilder = context.buildConstraintViolationWithTemplate(mensagem);
 			violationBuilder.addPropertyNode(atributoConfirmacao).addConstraintViolation();
 		}
-		
+
 		return valido;
 	}
 
@@ -51,5 +52,4 @@ public class AtributoConfirmacaoValidator implements ConstraintValidator<Atribut
 		return valorAtributo == null && valorAtributoConfirmacao == null;
 	}
 
-	
 }

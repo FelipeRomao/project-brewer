@@ -15,14 +15,14 @@ public class CadastroClienteService {
 
 	@Autowired
 	private Clientes clientes;
-	
+
 	@Transactional
 	public void salvar(Cliente cliente) {
 		Optional<Cliente> clienteExistente = clientes.findByCpfOuCnpj(cliente.getCpfOuCnpjSemFormatacao());
-		if(clienteExistente.isPresent()) {
+		if (clienteExistente.isPresent()) {
 			throw new CpfCnpjClienteJaCadastradoException("CPF/CNPJ já cadastrado");
 		}
-		
+
 		clientes.save(cliente);
 	}
 }

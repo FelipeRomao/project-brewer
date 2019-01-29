@@ -23,7 +23,7 @@ public class EstilosImpl implements EstilosQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@Autowired
 	private PaginacaoUtil paginacaoUtil;
 
@@ -33,7 +33,7 @@ public class EstilosImpl implements EstilosQueries {
 	public Page<Estilo> filtrar(EstiloFilter filtro, Pageable pageable) {
 
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Estilo.class);
-		
+
 		paginacaoUtil.preparar(criteria, pageable);
 		adicionarFiltro(filtro, criteria);
 

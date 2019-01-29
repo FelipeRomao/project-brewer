@@ -13,27 +13,26 @@ public class OrderElementTagProcessor extends AbstractElementTagProcessor {
 
 	private static final String NOME_TAG = "order";
 	private static final int PRECEDENCIA = 1000;
-	
+
 	public OrderElementTagProcessor(String dialectPrefix) {
 		super(TemplateMode.HTML, dialectPrefix, NOME_TAG, true, null, false, PRECEDENCIA);
 	}
-	
+
 	@Override
 	protected void doProcess(ITemplateContext context, IProcessableElementTag tag,
 			IElementTagStructureHandler structureHandler) {
-		
+
 		IModelFactory modelFactory = context.getModelFactory();
 		IModel model = modelFactory.createModel();
-		
+
 		IAttribute page = tag.getAttribute("page");
 		IAttribute field = tag.getAttribute("field");
 		IAttribute text = tag.getAttribute("text");
-		
-		model.add(modelFactory.createStandaloneElementTag("th:block", "th:replace",
-				  String.format("fragments/Ordenacao :: order(%s, %s, '%s')", 
-						 page.getValue(), field.getValue(), text.getValue())));
-		
+
+		model.add(modelFactory.createStandaloneElementTag("th:block", "th:replace", String.format(
+				"fragments/Ordenacao :: order(%s, %s, '%s')", page.getValue(), field.getValue(), text.getValue())));
+
 		structureHandler.replaceWith(model, true);
-		
+
 	}
 }

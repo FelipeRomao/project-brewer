@@ -20,25 +20,24 @@ public class MailConfig {
 
 	@Autowired
 	private Environment env;
-	
+
 	@Bean
 	public JavaMailSender mailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		
+
 		mailSender.setHost(env.getProperty("mail.smtp.host"));
 		mailSender.setPort(env.getProperty("mail.smtp.port", Integer.class));
 		mailSender.setUsername(env.getProperty("mail.smtp.username"));
 		mailSender.setPassword(env.getProperty("mail.smtp.password"));
-				
+
 		Properties props = new Properties();
 		props.put("mail.transport.protocol", "smtp");
 		props.put("mail.smtp.auth", true);
 		props.put("mail.smtp.starttls.enable", true);
 		props.put("mail.smtp.connectiontimeout", 10000);
-		
+
 		mailSender.setJavaMailProperties(props);
-		
+
 		return mailSender;
 	}
 }
-

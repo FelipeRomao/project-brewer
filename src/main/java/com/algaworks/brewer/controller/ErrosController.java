@@ -11,7 +11,7 @@ public class ErrosController {
 	public String paginaNaoEncontrada() {
 		return "404";
 	}
-	
+
 	@PostMapping("/500")
 	public String erroServidor() {
 		return "500";

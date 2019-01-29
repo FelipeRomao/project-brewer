@@ -113,13 +113,12 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		NumberStyleFormatter integerFormatter = new NumberStyleFormatter("#,##0");
 		conversionService.addFormatterForFieldType(Integer.class, integerFormatter);
 
-		
-		//API de Datas do Java 8
+		// API de Datas do Java 8
 		DateTimeFormatterRegistrar dateTimeFormatterRegistrar = new DateTimeFormatterRegistrar();
 		dateTimeFormatterRegistrar.setDateFormatter(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		dateTimeFormatterRegistrar.setTimeFormatter(DateTimeFormatter.ofPattern("HH:mm"));
 		dateTimeFormatterRegistrar.registerFormatters(conversionService);
-		
+
 		return conversionService;
 	}
 
@@ -139,16 +138,16 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		return cacheManager;
 
 	}
-	
+
 	@Bean
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource bundle = new ReloadableResourceBundleMessageSource();
 		bundle.setBasename("classpath:/messages");
 		bundle.setDefaultEncoding("UTF-8");
-		
+
 		return bundle;
 	}
-	
+
 	@Bean
 	public DomainClassConverter<FormattingConversionService> domainClassConverter() {
 		return new DomainClassConverter<FormattingConversionService>(mvcConversionService());

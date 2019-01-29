@@ -35,7 +35,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		HttpPutFormContentFilter httpPutFormContentFilter = new HttpPutFormContentFilter();
 		return new Filter[] { httpPutFormContentFilter };
 	}
-	
+
 	@Override
 	protected void customizeRegistration(Dynamic registration) {
 		registration.setMultipartConfig(new MultipartConfigElement(""));

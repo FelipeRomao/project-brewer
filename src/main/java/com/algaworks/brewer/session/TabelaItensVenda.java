@@ -20,11 +20,7 @@ class TabelaItensVenda {
 	}
 
 	public BigDecimal getValorTotal() {
-		return itens
-				.stream()
-				.map(ItemVenda::getValorTotal)
-				.reduce(BigDecimal::add)
-				.orElse(BigDecimal.ZERO);
+		return itens.stream().map(ItemVenda::getValorTotal).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
 	}
 
 	public void adicionarItem(Cerveja cerveja, Integer quantidade) {
@@ -63,13 +59,11 @@ class TabelaItensVenda {
 	public List<ItemVenda> getItens() {
 		return itens;
 	}
-	
+
 	private Optional<ItemVenda> buscarItemPorCerveja(Cerveja cerveja) {
-		return itens.stream()
-					.filter(i -> i.getCerveja().equals(cerveja))
-					.findAny();
+		return itens.stream().filter(i -> i.getCerveja().equals(cerveja)).findAny();
 	}
-	
+
 	public String getUuid() {
 		return uuid;
 	}

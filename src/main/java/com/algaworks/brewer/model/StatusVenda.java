@@ -2,9 +2,7 @@ package com.algaworks.brewer.model;
 
 public enum StatusVenda {
 
-	ORCAMENTO("Orçamento"), 
-	EMITIDA("Emitida"), 
-	CANCELADA("Cancelada");
+	ORCAMENTO("Orçamento"), EMITIDA("Emitida"), CANCELADA("Cancelada");
 
 	private String descricao;
 

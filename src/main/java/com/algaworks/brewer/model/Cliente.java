@@ -37,7 +37,7 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
+
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
 
@@ -53,20 +53,20 @@ public class Cliente implements Serializable {
 	private String cpfOuCnpj;
 
 	private String telefone;
-	
+
 	@Email(message = "e-mail inválido")
 	private String email;
 
 	@JsonIgnore
 	@Embedded
 	private Endereco endereco;
-	
-	@PrePersist 
+
+	@PrePersist
 	@PreUpdate
 	private void prePersistPreUpdate() {
 		this.cpfOuCnpj = this.cpfOuCnpj.replaceAll("\\.|-|/", "");
 	}
-	
+
 	@PostLoad
 	private void postLoad() {
 		this.cpfOuCnpj = this.tipoPessoa.formatar(this.cpfOuCnpj);
@@ -127,7 +127,7 @@ public class Cliente implements Serializable {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
+
 	public String getCpfOuCnpjSemFormatacao() {
 		return TipoPessoa.removerFormatacao(this.cpfOuCnpj);
 	}

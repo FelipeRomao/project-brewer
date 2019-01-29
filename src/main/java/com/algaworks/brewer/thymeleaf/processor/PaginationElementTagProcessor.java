@@ -13,25 +13,24 @@ public class PaginationElementTagProcessor extends AbstractElementTagProcessor {
 
 	private static final String NOME_TAG = "pagination";
 	private static final int PRECEDENCIA = 1000;
-	
+
 	public PaginationElementTagProcessor(String dialectPrefix) {
 		super(TemplateMode.HTML, dialectPrefix, NOME_TAG, true, null, false, PRECEDENCIA);
 	}
-	
+
 	@Override
 	protected void doProcess(ITemplateContext context, IProcessableElementTag tag,
 			IElementTagStructureHandler structureHandler) {
-		
+
 		IModelFactory modelFactory = context.getModelFactory();
 		IModel model = modelFactory.createModel();
-		
+
 		IAttribute page = tag.getAttribute("page");
-		
+
 		model.add(modelFactory.createStandaloneElementTag("th:block", "th:replace",
-				  String.format("fragments/Paginacao :: pagination(%s)", 
-						 page.getValue())));
-		
+				String.format("fragments/Paginacao :: pagination(%s)", page.getValue())));
+
 		structureHandler.replaceWith(model, true);
-		
+
 	}
 }

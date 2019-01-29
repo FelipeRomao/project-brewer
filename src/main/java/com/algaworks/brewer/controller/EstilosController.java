@@ -28,13 +28,13 @@ import com.algaworks.brewer.service.exception.NomeEstiloJaCadastradoException;
 @Controller
 @RequestMapping("/estilos")
 public class EstilosController {
-	
+
 	@Autowired
 	private CadastroEstiloService cadastroEstiloService;
 
 	@Autowired
 	private Estilos estilos;
-	
+
 	@GetMapping("/novo")
 	public ModelAndView novo(Estilo estilo) {
 		return new ModelAndView("estilo/CadastroEstilo");
@@ -68,13 +68,14 @@ public class EstilosController {
 		return ResponseEntity.ok(estilo);
 
 	}
-	
+
 	@GetMapping
-	public ModelAndView pesquisar(EstiloFilter estiloFilter, BindingResult result, @PageableDefault(size = 2) Pageable pageable, 
-		   HttpServletRequest httpServletRequest) {
+	public ModelAndView pesquisar(EstiloFilter estiloFilter, BindingResult result,
+			@PageableDefault(size = 2) Pageable pageable, HttpServletRequest httpServletRequest) {
 		ModelAndView mv = new ModelAndView("estilo/PesquisaEstilos");
-		
-		PageWrapper<Estilo> paginaWrapper = new PageWrapper<>(estilos.filtrar(estiloFilter, pageable), httpServletRequest);
+
+		PageWrapper<Estilo> paginaWrapper = new PageWrapper<>(estilos.filtrar(estiloFilter, pageable),
+				httpServletRequest);
 		mv.addObject("pagina", paginaWrapper);
 		return mv;
 	}

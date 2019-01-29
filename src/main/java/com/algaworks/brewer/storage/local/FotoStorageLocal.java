@@ -93,7 +93,7 @@ public class FotoStorageLocal implements FotoStorage {
 	public byte[] recuperarThumbnail(String fotoCerveja) {
 		return recuperar(THUMBNAIL_PREFIX + fotoCerveja);
 	}
-	
+
 	@Override
 	public void excluir(String foto) {
 		try {

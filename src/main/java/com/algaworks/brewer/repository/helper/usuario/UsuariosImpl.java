@@ -67,7 +67,7 @@ public class UsuariosImpl implements UsuariosQueries {
 
 		return new PageImpl<>(filtrados, pageable, total(filtro));
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public Usuario buscarComGrupos(Long codigo) {

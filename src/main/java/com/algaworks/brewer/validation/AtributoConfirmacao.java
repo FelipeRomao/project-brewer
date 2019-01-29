@@ -19,11 +19,12 @@ public @interface AtributoConfirmacao {
 
 	@OverridesAttribute(constraint = Pattern.class, name = "message")
 	String message() default "Atributos não conferem";
-	
+
 	Class<?>[] groups() default {};
+
 	Class<? extends Payload>[] payload() default {};
-	
+
 	String atributo();
-	
+
 	String atributoConfirmacao();
 }

@@ -11,7 +11,7 @@ public enum TipoPessoa {
 			return cpfOuCnpj.replaceAll("(\\d{3})(\\d{3})(\\d{3})", "$1.$2.$3-");
 		}
 	},
-	
+
 	JURIDICA("Jurídica", "CNPJ", "00.000.000/0000-00", CnpjGroup.class) {
 		@Override
 		public String formatar(String cpfOuCnpj) {
@@ -30,7 +30,7 @@ public enum TipoPessoa {
 		this.mascara = mascara;
 		this.grupo = grupo;
 	}
-	
+
 	public abstract String formatar(String cpfOuCnpj);
 
 	public String getDescricao() {
@@ -48,7 +48,7 @@ public enum TipoPessoa {
 	public Class<?> getGrupo() {
 		return grupo;
 	}
-	
+
 	public static String removerFormatacao(String cpfOuCnpj) {
 		return cpfOuCnpj.replaceAll("\\.|-|/", "");
 	}

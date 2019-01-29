@@ -49,10 +49,10 @@ public class CidadesImpl implements CidadesQueries {
 
 	private void adicionarFiltro(CidadeFilter filtro, Criteria criteria) {
 		if (filtro != null) {
-			if(filtro.getEstado() != null) {
+			if (filtro.getEstado() != null) {
 				criteria.add(Restrictions.eq("estado", filtro.getEstado()));
 			}
-			
+
 			if (!StringUtils.isEmpty(filtro.getNome())) {
 				criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
 			}

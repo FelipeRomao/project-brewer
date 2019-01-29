@@ -19,11 +19,11 @@ public class CadastroCidadeService {
 	@Transactional
 	public void salvar(Cidade cidade) {
 		Optional<Cidade> cidadeExistente = cidades.findByNomeAndEstado(cidade.getNome(), cidade.getEstado());
-		
-		if(cidadeExistente.isPresent()) {
+
+		if (cidadeExistente.isPresent()) {
 			throw new NomeCidadeJaCadastradaException("Nome de cidade já cadastrado");
 		}
-		
+
 		cidades.save(cidade);
 
 	}

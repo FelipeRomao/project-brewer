@@ -7,17 +7,17 @@ import org.hibernate.validator.spi.group.DefaultGroupSequenceProvider;
 
 import com.algaworks.brewer.model.Cliente;
 
-public class ClienteGroupSequenceProvider implements DefaultGroupSequenceProvider<Cliente>{
+public class ClienteGroupSequenceProvider implements DefaultGroupSequenceProvider<Cliente> {
 
 	@Override
 	public List<Class<?>> getValidationGroups(Cliente cliente) {
 		List<Class<?>> grupos = new ArrayList<>();
-		grupos.add(Cliente.class);  
-		
-		if(isPessoaSelecionada(cliente)) {
+		grupos.add(Cliente.class);
+
+		if (isPessoaSelecionada(cliente)) {
 			grupos.add(cliente.getTipoPessoa().getGrupo());
 		}
-		
+
 		return grupos;
 	}
 
