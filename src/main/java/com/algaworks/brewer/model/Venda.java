@@ -20,11 +20,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
 @Table(name = "venda")
+@DynamicUpdate
 public class Venda {
 
 	@Id
@@ -205,12 +209,28 @@ public class Venda {
 		LocalDate inicio = dataCriacao != null ? dataCriacao.toLocalDate() : LocalDate.now();
 		return ChronoUnit.DAYS.between(inicio, LocalDate.now());
 	}
+	
+	public boolean isSalvarPermitido() {
+		return !status.equals(StatusVenda.CANCELADA);
+	}
+	
+	public boolean isSalvarProibido() {
+		return !isSalvarPermitido();
+	}
 
 	private BigDecimal calcularValorTotal(BigDecimal valorTotatlItens, BigDecimal valorFrete,
 			BigDecimal valorDesconto) {
 		BigDecimal valorTotal = valorTotatlItens.add(Optional.ofNullable(valorFrete).orElse(BigDecimal.ZERO))
 				.subtract(Optional.ofNullable(valorDesconto).orElse(BigDecimal.ZERO));
 		return valorTotal;
+	}
+	
+	@PostLoad
+	private void postLoad() {
+		if(dataHoraEntrega != null) {
+			this.dataEntrega = this.dataHoraEntrega.toLocalDate();
+			this.horarioEntrega = this.dataHoraEntrega.toLocalTime();
+		}
 	}
 
 	@Override

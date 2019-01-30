@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -90,7 +91,7 @@ public class VendasController {
 		venda.setUsuario(usuarioSistema.getUsuario());
 
 		cadastroVendaService.salvar(venda);
-		attributes.addFlashAttribute("mensagem", "Venda salva com sucesso");
+		attributes.addFlashAttribute("mensagem", String.format("Venda nº%d salva com sucesso", venda.getCodigo()));
 
 		return new ModelAndView("redirect:/vendas/nova");
 	}
@@ -107,7 +108,7 @@ public class VendasController {
 		venda.setUsuario(usuarioSistema.getUsuario());
 
 		cadastroVendaService.emitir(venda);
-		attributes.addFlashAttribute("mensagem", "Venda emitida com sucesso");
+		attributes.addFlashAttribute("mensagem", String.format("Venda nº%d emitida com sucesso", venda.getCodigo()));
 
 		return new ModelAndView("redirect:/vendas/nova");
 	}
@@ -126,8 +127,7 @@ public class VendasController {
 		venda = cadastroVendaService.salvar(venda);
 		mailer.enviar(venda);
 
-		attributes.addFlashAttribute("mensagem",
-				String.format("Venda nº %d salva com sucesso e e-mail enviado", venda.getCodigo()));
+		attributes.addFlashAttribute("mensagem", String.format("Venda nº%d salva e e-mail enviado com sucesso", venda.getCodigo()));
 		return new ModelAndView("redirect:/vendas/nova");
 	}
 
@@ -153,7 +153,7 @@ public class VendasController {
 	}
 
 	@GetMapping
-	public ModelAndView pesquisar(VendaFilter vendaFilter, @PageableDefault(size = 3) Pageable pageable,
+	public ModelAndView pesquisar(VendaFilter vendaFilter, @PageableDefault(size = 10) Pageable pageable,
 			HttpServletRequest httpServletRequest) {
 		ModelAndView mv = new ModelAndView("venda/PesquisaVendas");
 		mv.addObject("todosStatus", StatusVenda.values());
@@ -179,6 +179,20 @@ public class VendasController {
 
 		return mv;
 	}
+	
+	@PostMapping(value = "/nova", params = "cancelar")
+	public ModelAndView cancelar(Venda venda, BindingResult result, 
+			RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+		
+		try {
+			cadastroVendaService.cancelar(venda);
+		}catch(AccessDeniedException e) {
+			return new ModelAndView("/403");
+		}
+		
+		attributes.addFlashAttribute("mensagem", "Venda cancelada com sucesso");
+		return new ModelAndView("redirect:/vendas/" + venda.getCodigo());
+	}
 
 	private ModelAndView mvTabelaItensVenda(String uuid) {
 		ModelAndView mv = new ModelAndView("venda/TabelaItensVenda");
@@ -199,5 +213,4 @@ public class VendasController {
 			venda.setUuid(UUID.randomUUID().toString());
 		}
 	}
-
 }

@@ -42,7 +42,7 @@ public class VendasImpl implements VendasQueries {
 
 		return new PageImpl<>(criteria.list(), pageable, total(filtro));
 	}
-	
+
 	@Transactional(readOnly = true)
 	@Override
 	public Venda buscarComItens(Long codigo) {
