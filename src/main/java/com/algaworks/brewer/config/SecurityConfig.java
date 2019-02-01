@@ -36,11 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/cidades/nova").hasAuthority("CADASTRAR_CIDADE")
-				.antMatchers("/usuarios/**").hasAuthority("CADASTRAR_USUARIO").anyRequest().authenticated().and()
-				.formLogin().loginPage("/login").permitAll().and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).and().exceptionHandling()
-				.accessDeniedPage("/403").and().sessionManagement().invalidSessionUrl("/login");
+		http.authorizeRequests()
+				.antMatchers("/cidades/nova").hasAuthority("CADASTRAR_CIDADE")
+				.antMatchers("/usuarios/**").hasAuthority("CADASTRAR_USUARIO")
+				.anyRequest().authenticated()
+				.and().formLogin().loginPage("/login").permitAll()
+				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.and().exceptionHandling().accessDeniedPage("/403")
+				.and().sessionManagement().invalidSessionUrl("/login");
 	}
 
 	@Bean
