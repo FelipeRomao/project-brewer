@@ -88,7 +88,8 @@ public class ClientesController {
 	}
 	
 	@GetMapping("/{codigo}")
-	public ModelAndView editar(@PathVariable("codigo") Cliente cliente) {
+	public ModelAndView editar(@PathVariable Long codigo) {
+		Cliente cliente = clientes.buscarCidadeEstado(codigo);
 		ModelAndView mv = novo(cliente);
 		mv.addObject(cliente);
 		

@@ -10,4 +10,5 @@ public interface ClientesQueries {
 
 	public Page<Cliente> filtrar(ClienteFilter filtro, Pageable pageable);
 	
+	public Cliente buscarCidadeEstado(Long codigo);
 }
