@@ -57,7 +57,7 @@
 					</div>
 				</div>
 				
-				<div class="form-group  col-sm-8 bw-required" brewer:classforerror="cpfOuCnpj">
+				<div class="form-group  col-sm-8 bw-required">
 					<label for="cpfOuCnpj" class="control-label">CPF/CNPJ</label>
 					<input type="text" class="form-control" id="cpfOuCnpj" disabled th:field="*{cpfOuCnpj}" />
 				</div>
@@ -95,7 +95,7 @@
 					<label for="cep" class="control-label">CEP</label>
 					<input type="text" id="cep" class="form-control js-cep" th:field="*{endereco.cep}" />
 				</div>
-				<div class="form-group col-sm-4 bw-required">
+				<div class="form-group col-sm-4 bw-required" brewer:classforerror="endereco.estado">
 					<label for="estado" class="control-label">Estado</label>
 					<select id="estado" class="form-control" th:field="*{endereco.cidade.estado}">
 						<option value="">Selecione o estado</option>

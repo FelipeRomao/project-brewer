@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -87,6 +88,13 @@ public class ClientesController {
 		return clientes.findByNomeStartingWithIgnoreCase(nome);
 	}
 	
+	@DeleteMapping("/{codigo}")
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable Cliente cliente) {
+		cadastroClienteService.excluir(cliente);
+		
+		return ResponseEntity.ok().build();
+	}
+	
 	@GetMapping("/{codigo}")
 	public ModelAndView editar(@PathVariable Long codigo) {
 		Cliente cliente = clientes.buscarCidadeEstado(codigo);
@@ -100,7 +108,6 @@ public class ClientesController {
 		if (StringUtils.isEmpty(nome) || nome.length() < 3) {
 			throw new IllegalArgumentException();
 		}
-
 	}
 
 	@ExceptionHandler(IllegalArgumentException.class)

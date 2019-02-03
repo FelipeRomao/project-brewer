@@ -25,4 +25,9 @@ public class CadastroClienteService {
 		
 		clientes.save(cliente);
 	}
+	
+	@Transactional
+	public void excluir(Cliente cliente) {
+		clientes.delete(cliente);
+	}
 }

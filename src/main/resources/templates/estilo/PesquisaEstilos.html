@@ -3,7 +3,8 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/LayoutPadrao}"
-	xmlns:brewer="http://brewer.algaworks.com">
+	xmlns:brewer="http://brewer.algaworks.com"
+	xmlns:data="http://www.thymeleaf.org/extras/data">
 <head>
 	<title>Pesquisa de estilos</title>
 </head>
@@ -61,7 +62,8 @@
 									th:href="@{/estilos/{codigo}(codigo=${estilo.codigo})}"> 
 									<i class="glyphicon glyphicon-pencil"></i>
 								</a>
-								<a class="btn  btn-link  btn-xs js-tooltip" title="Excluir">
+								<a class="btn  btn-link  btn-xs js-tooltip js-exclusao-btn" title="Excluir"
+									data:url="@{/estilos/{codigo}(codigo=${estilo.codigo})}" data:objeto="${estilo.nome}">
 									<i class="glyphicon glyphicon-remove"></i>
 								</a>
 							</td>
