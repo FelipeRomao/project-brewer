@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.algaworks.brewer.dto.VendaMes;
+import com.algaworks.brewer.dto.VendaOrigem;
 import com.algaworks.brewer.model.StatusVenda;
 import com.algaworks.brewer.model.TipoPessoa;
 import com.algaworks.brewer.model.Venda;
@@ -100,6 +101,15 @@ public class VendasImpl implements VendasQueries {
 		List<VendaMes> vendasMes = manager.createNamedQuery("Vendas.totalPorMes").getResultList();
 		
 		return vendasMes;
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<VendaOrigem> totalPorOrigem() {
+		List<VendaOrigem> vendaOrigem = manager.createNamedQuery("Vendas.porOrigem").getResultList();
+		
+		return vendaOrigem;
 	}
 
 	private Long total(VendaFilter filtro) {
