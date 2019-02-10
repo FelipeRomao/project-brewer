@@ -26,7 +26,7 @@ public class Cidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
-	@NotBlank(message = "Nome é obrigatório")
+	@NotBlank(message = "Nome da cidade é obrigatório")
 	private String nome;
 
 	@NotNull(message = "Estado é obrigatório")

@@ -84,7 +84,7 @@ public class EstilosController {
 	}
 
 	@DeleteMapping("/{codigo}")
-	public @ResponseBody ResponseEntity<?> editar(@PathVariable("codigo") Estilo estilo) {
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Estilo estilo) {
 		try {
 			cadastroEstiloService.excluir(estilo);
 		} catch (ImpossivelExcluirEntidadeException e) {

@@ -31,6 +31,7 @@ import com.algaworks.brewer.repository.Estados;
 import com.algaworks.brewer.repository.filter.ClienteFilter;
 import com.algaworks.brewer.service.CadastroClienteService;
 import com.algaworks.brewer.service.exception.CpfCnpjClienteJaCadastradoException;
+import com.algaworks.brewer.service.exception.ImpossivelExcluirEntidadeException;
 
 @Controller
 @RequestMapping("/clientes")
@@ -87,20 +88,24 @@ public class ClientesController {
 		validarTamanhoNome(nome);
 		return clientes.findByNomeStartingWithIgnoreCase(nome);
 	}
-	
+
 	@DeleteMapping("/{codigo}")
-	public @ResponseBody ResponseEntity<?> excluir(@PathVariable Cliente cliente) {
-		cadastroClienteService.excluir(cliente);
-		
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Cliente cliente) {
+		try {
+			cadastroClienteService.excluir(cliente);
+		} catch (ImpossivelExcluirEntidadeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@GetMapping("/{codigo}")
 	public ModelAndView editar(@PathVariable Long codigo) {
 		Cliente cliente = clientes.buscarCidadeEstado(codigo);
 		ModelAndView mv = novo(cliente);
 		mv.addObject(cliente);
-		
+
 		return mv;
 	}
 
