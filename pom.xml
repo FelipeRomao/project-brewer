@@ -70,6 +70,8 @@
 		<!-- JUnit -->
 		<junit.version>4.12</junit.version>
 		
+		<!-- AWS SDK - S3 -->
+		<aws-java-sdk-s3.version>1.10.77</aws-java-sdk-s3.version>
 	</properties>
 
 	<build>
@@ -288,12 +290,18 @@
 			<scope>test</scope>
 		</dependency>
 	
-	
 		<!-- Java Mail -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
+		</dependency>
+		
+		<!-- AWS SDK - S3 -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>${aws-java-sdk-s3.version}</version>
 		</dependency>
 	
 	</dependencies>
