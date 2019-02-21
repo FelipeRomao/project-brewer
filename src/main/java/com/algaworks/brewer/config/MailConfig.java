@@ -15,7 +15,7 @@ import com.algaworks.brewer.mail.Mailer;
 
 @Configuration
 @ComponentScan(basePackageClasses = Mailer.class)
-@PropertySource(value = {"classpath:env/mail-${ambiente:prod}.properties"})
+@PropertySource(value = {"classpath:env/mail-${ambiente:local}.properties"})
 @PropertySource(value = { "file:\\${USERPROFILE}\\.mail.properties" }, ignoreResourceNotFound = true)
 public class MailConfig {
 
