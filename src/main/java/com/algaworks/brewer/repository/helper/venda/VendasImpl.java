@@ -1,6 +1,7 @@
 package com.algaworks.brewer.repository.helper.venda;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.MonthDay;
@@ -99,6 +100,18 @@ public class VendasImpl implements VendasQueries {
 	@Override
 	public List<VendaMes> totalPorMes() {
 		List<VendaMes> vendasMes = manager.createNamedQuery("Vendas.totalPorMes").getResultList();
+		
+		LocalDate hoje = LocalDate.now();
+		for(int i = 1; i <= 6; i++) {
+			String mesIdeal = String.format("%d/%02d", hoje.getYear(), hoje.getMonth());
+			
+			boolean possuiMes = vendasMes.stream().filter(v -> v.getMes().equals(mesIdeal)).findAny().isPresent();
+			if(!possuiMes) {
+				vendasMes.add(i - 1, new VendaMes(mesIdeal, 0));
+			}
+			
+			hoje = hoje.minusMonths(1);
+		}
 		
 		return vendasMes;
 	}
