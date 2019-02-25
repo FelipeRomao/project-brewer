@@ -1,32 +1,32 @@
 Brewer = Brewer || {};
 
-Brewer.AutoComplete = (function() {
+Brewer.Autocomplete = (function() {
 	
-	function AutoComplete() {
+	function Autocomplete() {
 		this.skuOuNomeInput = $('.js-sku-nome-cerveja-input');
-		var htmlTemplateAutoComplete = $('#template-autocomplete-cerveja').html();
-		this.template = Handlebars.compile(htmlTemplateAutoComplete);
+		var htmlTemplateAutocomplete = $('#template-autocomplete-cerveja').html();
+		this.template = Handlebars.compile(htmlTemplateAutocomplete);
 		this.emitter = $({});
 		this.on = this.emitter.on.bind(this.emitter);
 	}
 	
-	AutoComplete.prototype.iniciar = function() {
+	Autocomplete.prototype.iniciar = function() {
 		var options = {
-			url : function(skuOuNome) {
+			url: function(skuOuNome) {
 				return this.skuOuNomeInput.data('url') + '?skuOuNome=' + skuOuNome;
 			}.bind(this),
-			getValue : 'nome',
+			getValue: 'nome',
 			minCharNumber: 3,
-			requestDelay : 300,
-			ajaxSettings : {
-				contentType : 'application/json'
+			requestDelay: 300,
+			ajaxSettings: {
+				contentType: 'application/json'
 			},
-			template : {
-				type : 'custom',
-				method : template.bind(this)
+			template: {
+				type: 'custom',
+				method: template.bind(this)
 			},
-			list : {
-				onChooseEvent : onItemSelecionado.bind(this)
+			list: {
+				onChooseEvent: onItemSelecionado.bind(this)
 			}
 		};
 		
@@ -42,9 +42,8 @@ Brewer.AutoComplete = (function() {
 	function template(nome, cerveja) {
 		cerveja.valorFormatado = Brewer.formatarMoeda(cerveja.valor);
 		return this.template(cerveja);
-		
 	}
 	
-	return AutoComplete;
+	return Autocomplete
 	
 }());

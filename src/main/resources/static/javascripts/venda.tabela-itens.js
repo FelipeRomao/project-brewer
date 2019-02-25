@@ -21,11 +21,11 @@ Brewer.TabelaItens = (function() {
 	
 	function onItemSelecionado(evento, item) {
 		var resposta = $.ajax({
-			url : 'item',
-			method : 'POST',
-			data : {
-				codigoCerveja : item.codigo,
-				uuid : this.uuid
+			url: 'item',
+			method: 'POST',
+			data: {
+				codigoCerveja: item.codigo,
+				uuid: this.uuid
 			}
 		});
 		
@@ -37,8 +37,7 @@ Brewer.TabelaItens = (function() {
 		
 		bindQuantidade.call(this);
 		
-		var tabelaItem = bindTabelaItem.call(this);
-		
+		var tabelaItem = bindTabelaItem.call(this); 
 		this.emitter.trigger('tabela-itens-atualizada', tabelaItem.data('valor-total'));
 	}
 	
@@ -46,7 +45,7 @@ Brewer.TabelaItens = (function() {
 		var input = $(evento.target);
 		var quantidade = input.val();
 		
-		if(quantidade <= 0) {
+		if (quantidade <= 0) {
 			input.val(1);
 			quantidade = 1;
 		}
@@ -54,11 +53,11 @@ Brewer.TabelaItens = (function() {
 		var codigoCerveja = input.data('codigo-cerveja');
 		
 		var resposta = $.ajax({
-			url : 'item/' + codigoCerveja,
-			method : 'PUT',
-			data : {
-				quantidade : quantidade,
-				uuid : this.uuid
+			url: 'item/' + codigoCerveja,
+			method: 'PUT',
+			data: {
+				quantidade: quantidade,
+				uuid: this.uuid
 			}
 		});
 		
@@ -71,10 +70,9 @@ Brewer.TabelaItens = (function() {
 	
 	function onExclusaoItemClick(evento) {
 		var codigoCerveja = $(evento.target).data('codigo-cerveja');
-		
 		var resposta = $.ajax({
-			url : 'item/' + this.uuid + '/' + codigoCerveja,
-			method : 'DELETE'
+			url: 'item/' + this.uuid + '/' + codigoCerveja,
+			method: 'DELETE'
 		});
 		
 		resposta.done(onItemAtualizadoNoServidor.bind(this));
@@ -82,15 +80,14 @@ Brewer.TabelaItens = (function() {
 	
 	function bindQuantidade() {
 		var quantidadeItemInput = $('.js-tabela-cerveja-quantidade-item');
-		quantidadeItemInput.on('blur', onQuantidadeItemAlterado.bind(this));
-		quantidadeItemInput.maskNumber({ integer : true, thousands : '' });
+		quantidadeItemInput.on('change', onQuantidadeItemAlterado.bind(this));
+		quantidadeItemInput.maskNumber({ integer: true, thousands: '' });
 	}
 	
 	function bindTabelaItem() {
 		var tabelaItem = $('.js-tabela-item');
 		tabelaItem.on('dblclick', onDoubleClick);
 		$('.js-exclusao-item-btn').on('click', onExclusaoItemClick.bind(this));
-		
 		return tabelaItem;
 	}
 	
