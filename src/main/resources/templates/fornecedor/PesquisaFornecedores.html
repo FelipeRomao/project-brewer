@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:brewer="http://brewer.algaworks.com"
+	xmlns:data="http://www.thymeleaf.org/extras/data">
+<head>
+	<title>Pesquisa de fornecedores</title>
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+		<div class="page-header">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-10">
+						<h1>Pesquisa de fornecedores</h1>
+					</div>
+					<div class="col-xs-2">
+						<div class="aw-page-header-controls">
+							<a class="btn  btn-default" th:href="@{/fornecedores/novo}">
+								<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Novo Fornecedor</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container-fluid">
+			<form method="GET" th:object="${fornecedorFilter}">
+				<div class="row">
+					<div class="form-group col-sm-8">
+						<label for="nome" class="control-label">Razão Social</label>
+						<input type="text" id="nome" class="form-control" autofocus="autofocus" th:field="*{razaoSocial}" />
+					</div>
+					<div class="form-group col-sm-4">
+						<label for="cpfOuCnpj" class="control-label">CNPJ</label>
+						<input type="text" id="cpfOuCnpj" class="form-control" th:field="*{cnpj}" />
+					</div>
+				</div>
+				
+				<button type="submit" class="btn btn-primary">Pesquisar</button>
+			</form>
+			
+			<div class="table-responsive  bw-tabela-simples">
+				<table class="table  table-hover">
+					<thead>
+						<tr>
+							<th class="table-clientes-col-nome">
+								<brewer:order page="${pagina}" field="razaoSocial" text="Razão Social" />
+							</th>
+							<th class="table-clientes-col-cpf-cnpj">CNPJ</th>
+							<th class="table-clientes-col-telefone">Telefone</th>
+							<th class="table-clientes-col-cidade-estado">Cidade/Estado</th>
+							<th class="table-col-acoes"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="fornecedor : ${pagina.conteudo}">
+							<td th:text="${fornecedor.razaoSocial}"></td>
+							<td th:text="${fornecedor.cnpj}" class="text-right">111.111.111-11</td>
+							<td th:text="${fornecedor.telefone}" class="text-right">(11) 99999-9999</td>
+							<td th:text="${fornecedor.endereco.nomeCidadeSiglaEstado}" class="text-right"></td>
+							
+							<td class="text-center">
+								<a class="btn  btn-link  btn-xs js-tooltip" title="Editar"
+									th:href="@{/fornecedores/{codigo}(codigo=${fornecedor.codigo})}"> 
+									<i class="glyphicon glyphicon-pencil"></i>
+								</a>
+								<a class="btn  btn-link  btn-xs js-tooltip js-exclusao-btn" title="Excluir"
+								data:url="@{/fornecedores/{codigo}(codigo=${fornecedor.codigo})}" data:objeto="${fornecedor.razaoSocial}">
+									<i class="glyphicon glyphicon-remove" ></i>
+								</a>
+							</td>
+						</tr>
+						<tr th:if="${pagina.vazia}">
+							<td colspan="5">Nenhum fornecedor encontrado</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<brewer:pagination page="${pagina}" />
+		</div>
+	</section>
+</body>
+</html>
