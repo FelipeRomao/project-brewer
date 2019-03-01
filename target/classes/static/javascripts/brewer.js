@@ -27,6 +27,20 @@ Brewer.MaskMoney = (function() {
 
 }());
 
+Brewer.MaskCnpj = (function() {
+	
+	function MaskCnpj() {
+		this.inputCnpj = $('.js-cnpj');
+	}
+	
+	MaskCnpj.prototype.iniciar = function() {
+		this.inputCnpj.mask('00.000.000/0000-00');
+	}
+	
+	return MaskCnpj;
+	
+}());
+
 Brewer.MaskPhoneNumber = (function() {
 
 	function MaskPhoneNumber() {
@@ -146,5 +160,8 @@ $(function() {
 	
 	var maskTime = new Brewer.MaskTime();
 	maskTime.iniciar();
+	
+	var maskCnpj = new Brewer.MaskCnpj();
+	maskCnpj.iniciar();
 
 });
