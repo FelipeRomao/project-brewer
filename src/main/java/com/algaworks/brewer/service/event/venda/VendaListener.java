@@ -23,5 +23,4 @@ public class VendaListener {
 			cervejas.save(cerveja);
 		}
 	}
-	
 }

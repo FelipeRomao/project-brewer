@@ -59,7 +59,7 @@ public class Venda {
 	@ManyToOne
 	@JoinColumn(name = "codigo_usuario")
 	private Usuario usuario;
-
+	
 	@Enumerated(EnumType.STRING)
 	private StatusVenda status = StatusVenda.ORCAMENTO;
 
@@ -74,7 +74,7 @@ public class Venda {
 
 	@Transient
 	private LocalTime horarioEntrega;
-
+	
 	public Long getCodigo() {
 		return codigo;
 	}
