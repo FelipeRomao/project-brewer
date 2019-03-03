@@ -64,31 +64,31 @@ public class FornecedoresController {
 		attributes.addFlashAttribute("mensagem", "Fornecedor salvo com sucesso");
 		return new ModelAndView("redirect:/fornecedores/novo");
 	}
-	
+
 	@GetMapping
 	public ModelAndView pesquisar(FornecedorFilter filtro, BindingResult result
 			,@PageableDefault(size = 3) Pageable pageable, HttpServletRequest httpServletRequest) {
 		ModelAndView mv = new ModelAndView("fornecedor/PesquisaFornecedores");
-		
+
 		PageWrapper<Fornecedor> paginaWrapper = new PageWrapper<>(fornecedores.filtrar(filtro, pageable), httpServletRequest);
 		mv.addObject("pagina", paginaWrapper);
-		
+
 		return mv;
 	}
-	
+
 	@GetMapping("/{codigo}")
 	public ModelAndView editar(@PathVariable Long codigo) {
 		Fornecedor fornecedor = fornecedores.buscarCidadeEstado(codigo);
 		ModelAndView mv = novo(fornecedor);
 		mv.addObject(fornecedor);
-		
+
 		return mv;
 	}
-	
+
 	@DeleteMapping("/{codigo}")
 	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Fornecedor fornecedor) {
 		cadastroFornecedorService.excluir(fornecedor);
-		
+
 		return ResponseEntity.ok().build();
 	}
 }
