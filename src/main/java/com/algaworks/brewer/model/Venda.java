@@ -59,7 +59,7 @@ public class Venda {
 	@ManyToOne
 	@JoinColumn(name = "codigo_usuario")
 	private Usuario usuario;
-	
+
 	@Enumerated(EnumType.STRING)
 	private StatusVenda status = StatusVenda.ORCAMENTO;
 
@@ -74,7 +74,7 @@ public class Venda {
 
 	@Transient
 	private LocalTime horarioEntrega;
-	
+
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -204,16 +204,16 @@ public class Venda {
 	public void calcularValorTotal() {
 		this.valorTotal = calcularValorTotal(getValorTotalItens(), getValorFrete(), getValorDesconto());
 	}
-	
+
 	public Long getDiasCriacao() {
 		LocalDate inicio = dataCriacao != null ? dataCriacao.toLocalDate() : LocalDate.now();
 		return ChronoUnit.DAYS.between(inicio, LocalDate.now());
 	}
-	
+
 	public boolean isSalvarPermitido() {
 		return !status.equals(StatusVenda.CANCELADA);
 	}
-	
+
 	public boolean isSalvarProibido() {
 		return !isSalvarPermitido();
 	}
@@ -224,10 +224,14 @@ public class Venda {
 				.subtract(Optional.ofNullable(valorDesconto).orElse(BigDecimal.ZERO));
 		return valorTotal;
 	}
-	
+
+	public boolean isEstoqueInsuficiente() {
+		return this.itens.stream().filter(i -> i.getCerveja().getQuantidadeEstoque() < 1).findAny().isPresent();
+	}
+
 	@PostLoad
 	private void postLoad() {
-		if(dataHoraEntrega != null) {
+		if (dataHoraEntrega != null) {
 			this.dataEntrega = this.dataHoraEntrega.toLocalDate();
 			this.horarioEntrega = this.dataHoraEntrega.toLocalTime();
 		}

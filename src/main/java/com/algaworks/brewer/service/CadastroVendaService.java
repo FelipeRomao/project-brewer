@@ -13,6 +13,7 @@ import com.algaworks.brewer.model.StatusVenda;
 import com.algaworks.brewer.model.Venda;
 import com.algaworks.brewer.repository.Vendas;
 import com.algaworks.brewer.service.event.venda.VendaEvent;
+import com.algaworks.brewer.service.exception.VendaEstoqueInsuficienteException;
 
 @Service
 public class CadastroVendaService {
@@ -39,6 +40,10 @@ public class CadastroVendaService {
 		if (venda.getDataEntrega() != null) {
 			venda.setDataHoraEntrega(LocalDateTime.of(venda.getDataEntrega(),
 					venda.getHorarioEntrega() != null ? venda.getHorarioEntrega() : LocalTime.now()));
+		}
+		
+		if(venda.isEstoqueInsuficiente()) {
+			throw new VendaEstoqueInsuficienteException("Impossível realizar venda! Estoque insuficiente.");
 		}
 		
 		return vendas.saveAndFlush(venda);
