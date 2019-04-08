@@ -10,5 +10,5 @@
 			  password="root" 
 			  initialPoolSize="5" 
 			  minPoolSize="5" 
-			  maxPoolSize="5" />
+			  maxPoolSize="5" />	
 </Context>  

@@ -40,6 +40,8 @@ import com.algaworks.brewer.repository.Vendas;
 import com.algaworks.brewer.repository.filter.VendaFilter;
 import com.algaworks.brewer.security.UsuarioSistema;
 import com.algaworks.brewer.service.CadastroVendaService;
+import com.algaworks.brewer.service.exception.ClienteInativoException;
+import com.algaworks.brewer.service.exception.VendaEstoqueInsuficienteException;
 import com.algaworks.brewer.session.TabelasItensSession;
 
 @Controller
@@ -94,7 +96,17 @@ public class VendasController {
 
 		venda.setUsuario(usuarioSistema.getUsuario());
 
-		cadastroVendaService.salvar(venda);
+		try {
+			cadastroVendaService.salvar(venda);
+		} catch (VendaEstoqueInsuficienteException e) {
+			result.rejectValue("itens", e.getMessage(), e.getMessage());
+			return nova(venda);
+
+		} catch (ClienteInativoException e) {
+			result.rejectValue("cliente", e.getMessage(), e.getMessage());
+			return nova(venda);
+		}
+
 		attributes.addFlashAttribute("mensagem", String.format("Venda nº%d salva com sucesso", venda.getCodigo()));
 
 		return new ModelAndView("redirect:/vendas/nova");
@@ -111,7 +123,17 @@ public class VendasController {
 
 		venda.setUsuario(usuarioSistema.getUsuario());
 
-		cadastroVendaService.emitir(venda);
+		try {
+			cadastroVendaService.emitir(venda);
+		} catch (VendaEstoqueInsuficienteException e) {
+			result.rejectValue("itens", e.getMessage(), e.getMessage());
+			return nova(venda);
+
+		} catch (ClienteInativoException e) {
+			result.rejectValue("cliente", e.getMessage(), e.getMessage());
+			return nova(venda);
+		}
+
 		attributes.addFlashAttribute("mensagem", String.format("Venda nº%d emitida com sucesso", venda.getCodigo()));
 
 		return new ModelAndView("redirect:/vendas/nova");
@@ -128,10 +150,20 @@ public class VendasController {
 
 		venda.setUsuario(usuarioSistema.getUsuario());
 
-		venda = cadastroVendaService.salvar(venda);
-		mailer.enviar(venda);
+		try {
+			venda = cadastroVendaService.salvar(venda);
+			mailer.enviar(venda);
+		} catch (VendaEstoqueInsuficienteException e) {
+			result.rejectValue("itens", e.getMessage(), e.getMessage());
+			return nova(venda);
 
-		attributes.addFlashAttribute("mensagem", String.format("Venda nº%d salva e e-mail enviado com sucesso", venda.getCodigo()));
+		} catch (ClienteInativoException e) {
+			result.rejectValue("cliente", e.getMessage(), e.getMessage());
+			return nova(venda);
+		}
+
+		attributes.addFlashAttribute("mensagem",
+				String.format("Venda nº%d salva e e-mail enviado com sucesso", venda.getCodigo()));
 		return new ModelAndView("redirect:/vendas/nova");
 	}
 
@@ -183,29 +215,29 @@ public class VendasController {
 
 		return mv;
 	}
-	
+
 	@PostMapping(value = "/nova", params = "cancelar")
-	public ModelAndView cancelar(Venda venda, BindingResult result, 
-			RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
-		
+	public ModelAndView cancelar(Venda venda, BindingResult result, RedirectAttributes attributes,
+			@AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+
 		try {
 			cadastroVendaService.cancelar(venda);
-		}catch(AccessDeniedException e) {
+		} catch (AccessDeniedException e) {
 			return new ModelAndView("/403");
 		}
-		
+
 		attributes.addFlashAttribute("mensagem", "Venda cancelada com sucesso");
 		return new ModelAndView("redirect:/vendas/" + venda.getCodigo());
 	}
-	
+
 	@GetMapping("/totalPorMes")
 	public @ResponseBody List<VendaMes> listarTotalVendaPorMes() {
 		return vendas.totalPorMes();
 	}
-	
+
 	@GetMapping("/totalPorOrigem")
 	public @ResponseBody List<VendaOrigem> listarTotalVendaPorOrigem() {
-		return  vendas.totalPorOrigem();
+		return vendas.totalPorOrigem();
 	}
 
 	private ModelAndView mvTabelaItensVenda(String uuid) {

@@ -52,6 +52,7 @@ public class TabelaItensVendaTest {
 		tabelaItensVenda.adicionarItem(c2, 2);
 		
 		assertEquals(new BigDecimal("18.88"), tabelaItensVenda.getValorTotal());
+		
 	}
 	
 	@Test

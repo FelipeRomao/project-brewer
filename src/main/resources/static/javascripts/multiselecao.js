@@ -24,7 +24,6 @@ Brewer.MultiSelecao = (function(){
 			return $(c).data('codigo');
 		});
 		
-		
 		if(codigos.length > 0) {
 			
 			$.ajax({

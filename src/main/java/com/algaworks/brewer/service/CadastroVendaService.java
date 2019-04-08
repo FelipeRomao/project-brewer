@@ -13,6 +13,8 @@ import com.algaworks.brewer.model.StatusVenda;
 import com.algaworks.brewer.model.Venda;
 import com.algaworks.brewer.repository.Vendas;
 import com.algaworks.brewer.service.event.venda.VendaEvent;
+import com.algaworks.brewer.service.exception.ClienteInativoException;
+import com.algaworks.brewer.service.exception.VendaEstoqueInsuficienteException;
 
 @Service
 public class CadastroVendaService {
@@ -39,6 +41,14 @@ public class CadastroVendaService {
 		if (venda.getDataEntrega() != null) {
 			venda.setDataHoraEntrega(LocalDateTime.of(venda.getDataEntrega(),
 					venda.getHorarioEntrega() != null ? venda.getHorarioEntrega() : LocalTime.now()));
+		}
+					
+		if(venda.isEstoqueInsuficiente()) {
+			throw new VendaEstoqueInsuficienteException("Estoque insuficiente! Faça reposição do estoque para continuar realizando essa venda.");
+		}
+		
+		if(venda.getCliente().getAtivo() == false) {
+			throw new ClienteInativoException("Impossível realizar venda! O cliente está como inativo.");
 		}
 		
 		return vendas.saveAndFlush(venda);

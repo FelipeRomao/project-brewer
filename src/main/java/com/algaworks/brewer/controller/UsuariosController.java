@@ -103,8 +103,7 @@ public class UsuariosController {
 
 	@PutMapping("/status")
 	@ResponseStatus(HttpStatus.OK)
-	public void atualizarStatus(@RequestParam("codigos[]") Long[] codigos,
-			@RequestParam("status") StatusUsuario statusUsuario) {
+	public void atualizarStatus(@RequestParam("codigos[]") Long[] codigos, @RequestParam("status") StatusUsuario statusUsuario) {
 		cadastroUsuarioService.alterarStatus(codigos, statusUsuario);
 	}
 

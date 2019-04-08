@@ -38,4 +38,10 @@ public class CadastroClienteService {
 			throw new ImpossivelExcluirEntidadeException("Impossível excluir! Cliente possui pedidos.");
 		}
 	}
+	
+	@Transactional
+	public void alterarStatus(Long[] codigos, StatusCliente statusCliente) {
+		statusCliente.executar(codigos, clientes);
+
+	}
 }

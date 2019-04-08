@@ -33,7 +33,7 @@
 		<form method="GET" th:object="${vendaFilter}" th:action="@{/vendas}">
 			<div class="row">
 				<div class="form-group  col-sm-6">
-					<label class="control-label" for="codigo">Código</label>
+					<label class="control-label" for="codigo">C&oacute;digo</label>
 					<input type="text" class="form-control" id="codigo" autofocus="autofocus" th:field="*{codigo}"/>
 				</div>
 				
@@ -48,11 +48,11 @@
 			
 			<div class="row">
 				<div class="form-group  col-sm-6">
-					<label for="dataCriacaoInicial">Data de criação</label>
+					<label for="dataCriacaoInicial">Data de cria&ccedil;&atilde;o</label>
 					<div class="form-inline">
 						<input type="text" class="form-control  aw-form-control-inline-sm  js-date" id="dataCriacaoInicial" 
 							th:field="*{desde}" autocomplete="off"/>
-						<label for="dataCriacaoFinal" class="aw-form-label-between">até</label>
+						<label for="dataCriacaoFinal" class="aw-form-label-between">at&eacute;</label>
 						<input type="text" class="form-control  aw-form-control-inline-sm  js-date" id="dataCriacaoInicial" 
 							th:field="*{ate}" autocomplete="off"/>
 					</div>
@@ -62,7 +62,7 @@
 					<label for="valorMinimo">Valor total</label>
 					<div class="form-inline">
 						<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal" id="valorMinimo" th:field="*{valorMinimo}"/>
-						<label for="valorMaximo" class="aw-form-label-between">até</label>
+						<label for="valorMaximo" class="aw-form-label-between">at&eacute;</label>
 						<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal" id="valorMaximo" th:field="*{valorMaximo}"/>
 					</div>
 				</div>
@@ -88,11 +88,11 @@
 			<table class="table  table-hover">
 	            <thead>
 	            	<tr>
-	                	<th>Código</th>
+	                	<th>C&oacute;digo</th>
 	                	<th>
 	                		<brewer:order page="${pagina}" field="c.nome" text="Cliente" />
 	                	</th>
-	                	<th>Data de criação</th>
+	                	<th>Data de cria&ccedil;&atilde;o</th>
 	                	<th>Valor total</th>
 	                	<th>Vendedor</th>
 	                	<th>Status</th>

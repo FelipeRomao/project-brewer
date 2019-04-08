@@ -19,7 +19,7 @@
 			<div class="row">
 				<div class="col-xs-10">
 					<h1 th:if="${venda.nova}">Cadastro de venda</h1>
-					<h1 th:unless="${venda.nova}">Edição da venda nº [[${venda.codigo}]]</h1>
+					<h1 th:unless="${venda.nova}">Edi&ccedil;&atilde;o da venda nº [[${venda.codigo}]]</h1>
 				</div>
 				
 				<div class="col-xs-2">
@@ -59,7 +59,7 @@
 						<div class="aw-box__icon">
 							<i class="fa  fa-tag  fa-3x"></i>
 						</div>
-						<div class="aw-box__value" th:text="${venda.status.descricao}">Orçamento</div>
+						<div class="aw-box__value" th:text="${venda.status.descricao}">Or&ccedil;amento</div>
 						<div class="aw-box__title">Status</div>
 					</div>
 				</div>
@@ -74,7 +74,7 @@
 							<span class="js-tooltip" th:if="${venda.diasCriacao == 1}">Há 1 dia</span>
 							<span class="js-tooltip" th:if="${venda.diasCriacao > 1}">Há [[${venda.diasCriacao}]] dias</span>
 						</div>
-						<div class="aw-box__title">Criação</div>
+						<div class="aw-box__title">Cria&ccedil;&atilde;o</div>
 					</div>
 				</div>
 			</div>
@@ -154,7 +154,7 @@
 						</div>
 						
 						<div class="form-group  col-sm-2">
-							<label class="control-label" for="horarioEntrega">Horário de entrega</label>
+							<label class="control-label" for="horarioEntrega">Hor&aacute;rio de entrega</label>
 						      <input id="horarioEntrega" type="text" class="form-control" 
 						      		th:field="*{horarioEntrega}" th:disabled="${venda.salvarProibido}" />
 						</div>
@@ -163,7 +163,7 @@
 					<div class="row">
 						<div class="form-group  col-sm-12">
 							<textarea class="form-control" id="dataEntrega" rows="5" 
-								placeholder="Alguma observação para o entregador desse pedido?" 
+								placeholder="Alguma observa&ccedil;&atilde;o para o entregador desse pedido?" 
 								th:field="*{observacao}" th:disabled="${venda.salvarProibido}"></textarea>
 						</div>
 					</div>

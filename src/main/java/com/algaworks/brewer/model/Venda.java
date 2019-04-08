@@ -217,6 +217,10 @@ public class Venda {
 	public boolean isSalvarProibido() {
 		return !isSalvarPermitido();
 	}
+	
+	public boolean isEstoqueInsuficiente() {
+		return this.itens.stream().filter(v -> v.getCerveja().getQuantidadeEstoque() < 1).findAny().isPresent();
+	}
 
 	private BigDecimal calcularValorTotal(BigDecimal valorTotatlItens, BigDecimal valorFrete,
 			BigDecimal valorDesconto) {

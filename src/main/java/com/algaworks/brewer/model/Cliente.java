@@ -56,6 +56,8 @@ public class Cliente implements Serializable {
 
 	@Email(message = "e-mail inválido")
 	private String email;
+	
+	private Boolean ativo;
 
 	@JsonIgnore
 	@Embedded
@@ -132,6 +134,14 @@ public class Cliente implements Serializable {
 		return TipoPessoa.removerFormatacao(this.cpfOuCnpj);
 	}
 	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	public boolean isNovo() {
 		return codigo == null;
 	}

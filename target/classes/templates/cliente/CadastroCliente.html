@@ -16,7 +16,7 @@
 				<div class="col-xs-10">
 					<h1 th:if="${cliente.novo}">Cadastro de cliente</h1>
 					
-					<h1 th:unless="${cliente.novo}" th:text="|Edição cadastro cliente - ${cliente.nome}|">Edição de cliente</h1>
+					<h1 th:unless="${cliente.novo}" th:text="|Edi&ccedil;&atilde;o cadastro cliente - ${cliente.nome}|">Edi&ccedil;&atilde;o de cliente</h1>
 				</div>
 				
 				<div class="col-xs-2">
@@ -81,7 +81,7 @@
 					<input type="text" id="logradouro" class="form-control" th:field="*{endereco.logradouro}" />
 				</div>
 				<div class="form-group col-sm-4 bw-required">
-					<label for="numero" class="control-label">Número</label>
+					<label for="numero" class="control-label">N&uacute;mero</label>
 					<input type="text" id="numero" class="form-control" th:field="*{endereco.numero}" />
 				</div>
 				<div class="form-group col-sm-4 bw-required">

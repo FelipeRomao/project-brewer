@@ -76,7 +76,7 @@
 
 /*
 ###################
-# PÁGINAS DO SISTEMA
+# PÃ�GINAS DO SISTEMA
 ###################
 */
 
@@ -148,6 +148,11 @@
 	text-align: right;
 }
 
+.table-clientes-col-status {
+	width: 140px;
+	text-align: right;
+}
+
 /* Colunas - Pesquisa de cidades */
 .table-cidades-col-nome {
 	
@@ -159,11 +164,10 @@
 }
 
 /* Colunas - Pesquisa de usuários */
-.table-usuarios-col-status {
+.table-col-status {
 	width: 30px;
 	text-align: center;
 }
-
 /* Tabela Cervejas página de Venda */
 .bw-tabela-cervejas {
 	margin-bottom: 15px;
@@ -182,7 +186,7 @@
 
 /*
 ######################################
-# CUSTOMIZAÇÃO DE COMPONENTES
+# CUSTOMIZAÃ‡ÃƒO DE COMPONENTES
 ######################################
 */
 
@@ -206,7 +210,7 @@
 	color : red;
 }
 
-/*Validação com o input-group*/
+/*ValidaÃ§Ã£o com o input-group*/
 .has-error .input-group-btn .btn.btn-default {
 	color: #a94442;
 	border-color: #a94442;
@@ -215,7 +219,7 @@
 
 /* Tabela Item */
 .bw-tabela-item {
-	position: relative; /* Para que o painel de exclusão apareça dentro da linha */
+	position: relative; /* Para que o painel de exclusÃ£o apareÃ§a dentro da linha */
 	
 	padding: 15px 0;
 	

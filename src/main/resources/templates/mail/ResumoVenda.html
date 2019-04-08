@@ -8,10 +8,10 @@
 		<img src="../../static/images/logo-gray.png" th:src="|cid:${logo}|"/>
 	</p>
 
-	<h1 style="font-size: 22px" th:text="|Olá ${venda.cliente.nome}|">Olá Maria!</h1>
+	<h1 style="font-size: 22px" th:text="|Ol&aacute; ${venda.cliente.nome}|">Ol&aacute; Maria!</h1>
 	
 	<p>
-		Estamos enviando para você a relação de itens da sua compra em nossa loja de cervejas.
+		Estamos enviando para voc&ecirc; a rela&ccedil;&atilde;o de itens da sua compra em nossa loja de cervejas.
 	</p>
 	
 	<table style="width: 100%; border-collapse: collapse;  margin: 20px 0">
@@ -50,7 +50,7 @@
 	</table>
 	
 	<p style="font-size: 12px">
-		* O status da sua compra é: <strong style="color: red"><span th:text="${venda.status.descricao}">orçamento</span></strong>.
+		* O status da sua compra &eacute;: <strong style="color: red"><span th:text="${venda.status.descricao}">or&ccedil;amento</span></strong>.
 	</p>
 	
 	<table style="width: 100%;">

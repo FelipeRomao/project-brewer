@@ -5,7 +5,7 @@
 	xmlns:brewer="http://brewer.algaworks.com"
 	layout:decorate="~{layout/LayoutPadrao}">
 <head>
-	<title>Cadastro de usuário</title>
+	<title>Cadastro de usu&aacute;rio</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-switch.min.css}"/>
 </head>	
 	
@@ -15,8 +15,8 @@
 			<div class="row">
 				<div class="container-fluid">
 					<div class="col-xs-10">
-						<h1 th:if="${usuario.novo}">Cadastro de usuário</h1>
-						<h1 th:unless="${usuario.novo}">Edição de usuário - [[${usuario.nome}]]</h1>
+						<h1 th:if="${usuario.novo}">Cadastro de usu&aacute;rio</h1>
+						<h1 th:unless="${usuario.novo}">Edi&ccedil;&atilde;o de usu&aacute;rio - [[${usuario.nome}]]</h1>
 					</div>
 					<div class="col-xs-2">
 						<div class="aw-page-header-controls">
@@ -61,7 +61,7 @@
 							<input type="password" id="senha" class="form-control" th:field="*{senha}" />
 						</div>
 						<div class="form-group col-sm-3" brewer:classforerror="confirmacaoSenha">
-							<label for="confirmacaoSenha" class="control-label">Confirmação de senha</label>
+							<label for="confirmacaoSenha" class="control-label">Confirma&ccedil;&atilde;o de senha</label>
 							<input type="password" id="confirmacaoSenha" class="form-control" th:field="*{confirmacaoSenha}" />
 						</div>
 						<div class="form-group col-sm-3" th:if="${#authentication.principal.usuario.codigo != usuario.codigo}">
