@@ -13,7 +13,10 @@ import com.algaworks.brewer.model.StatusVenda;
 import com.algaworks.brewer.model.Venda;
 import com.algaworks.brewer.repository.Vendas;
 import com.algaworks.brewer.service.event.venda.VendaEvent;
+<<<<<<< HEAD
 import com.algaworks.brewer.service.exception.ClienteInativoException;
+=======
+>>>>>>> 4365e483cbb4d47767b13e841d4ec1732fc08d29
 import com.algaworks.brewer.service.exception.VendaEstoqueInsuficienteException;
 
 @Service
@@ -49,6 +52,10 @@ public class CadastroVendaService {
 		
 		if(venda.getCliente().getAtivo() == false) {
 			throw new ClienteInativoException("Impossível realizar venda! O cliente está como inativo.");
+		}
+		
+		if(venda.isEstoqueInsuficiente()) {
+			throw new VendaEstoqueInsuficienteException("Impossível realizar venda! Estoque insuficiente.");
 		}
 		
 		return vendas.saveAndFlush(venda);
